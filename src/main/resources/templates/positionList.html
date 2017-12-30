@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Recent positions</title>
+	<link rel="stylesheet" th:href="@{/main.css}"></link>
+</head>
+<body>
+	<h2>Positions</h2>
+	<table>
+		<thead>
+			<tr>Timestamp</tr>
+			<tr>Latitude</tr>
+			<tr>Longitude</tr>
+		</thead>
+		<tbody>
+		    <tr th:each="position : ${positions}">
+		      <td th:text="${position.timestamp}">20171218</td>
+    		  <td th:text="${position.latitude}"></td>
+    		  <td th:text="${position.longitude}">${position.longitude}</td>
+		    </tr>
+		</tbody>
+	</table>
+</body>
+</html>

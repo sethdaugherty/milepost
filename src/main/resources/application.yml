@@ -1,0 +1,43 @@
+
+server:
+  port: 9001
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        
+  datasource:
+    url: jdbc:mysql://localhost:3306/wanderingmiles
+    username: api_write
+    password: d0ntguess
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    io.sethdaugherty.milepost: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: application.log
+
+---
+spring:
+  profiles: production
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+      
+  datasource:
+    url: jdbc:mysql://localhost:3306/wanderingmiles
+    username: api_write
+    password: Xa2Yr8V$K6pF$&Y
+
+logging:
+  file: /var/log/milepost/application.log
