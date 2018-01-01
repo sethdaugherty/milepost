@@ -6,14 +6,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-        
-  datasource:
-    url: jdbc:mysql://localhost:3306/wanderingmiles
-    username: api_write
-    password: d0ntguess
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+#        
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/wanderingmiles
+#    username: api_write
+#    password: d0ntguess
 
 logging:
   level:
@@ -23,6 +23,22 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file: application.log
+
+---
+spring:
+  profiles: integration
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        
+  datasource:
+    url: jdbc:mysql://localhost:3306/wanderingmiles
+    username: api_write
+    password: d0ntguess
 
 ---
 spring:
@@ -38,6 +54,17 @@ spring:
     url: jdbc:mysql://localhost:3306/wanderingmiles
     username: api_write
     password: Xa2Yr8V$K6pF$&Y
+
+
+security:
+  require-ssl: true
+  
+server:
+  ssl:
+    key-store: /etc/letsencrypt/live/sethdaugherty.io/keystore.p12
+    key-store-password: R0R2E1Ph57CKxj0
+    keyStoreType: PKCS12
+    keyAlias: tomcat
 
 logging:
   file: /var/log/milepost/application.log
