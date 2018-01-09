@@ -15,6 +15,9 @@ spring:
 #    username: api_write
 #    password: d0ntguess
 
+upload:
+  location: "C:\\Users\\Seth\\workspace\\wanderingmaps"
+
 logging:
   level:
     org.springframework.web: ERROR
@@ -45,7 +48,7 @@ spring:
   profiles: production
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
@@ -56,15 +59,15 @@ spring:
     password: Xa2Yr8V$K6pF$&Y
 
 
-security:
-  require-ssl: true
-  
-server:
-  ssl:
-    key-store: /etc/letsencrypt/live/sethdaugherty.io/keystore.p12
-    key-store-password: R0R2E1Ph57CKxj0
-    keyStoreType: PKCS12
-    keyAlias: tomcat
+#security:
+#  require-ssl: true
+#  
+#server:
+#  ssl:
+#    key-store: /etc/letsencrypt/live/sethdaugherty.io/keystore.p12
+#    key-store-password: R0R2E1Ph57CKxj0
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
 
 logging:
   file: /var/log/milepost/application.log

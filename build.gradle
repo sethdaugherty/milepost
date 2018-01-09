@@ -32,6 +32,12 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	
+	compile group: 'io.prometheus', name: 'simpleclient_common', version: '0.1.0'
+	compile group: 'io.prometheus', name: 'simpleclient', version: '0.1.0'
+	compile group: 'io.prometheus', name: 'simpleclient_hotspot', version: '0.1.0'
+	compile group: 'io.prometheus', name: 'simpleclient_servlet', version: '0.1.0'
+	
+	
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
 	runtime('com.h2database:h2')
@@ -39,6 +45,6 @@ dependencies {
 	
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
+	//testCompile('org.springframework.security:spring-security-test')
 }
 

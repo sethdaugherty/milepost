@@ -31,4 +31,13 @@ public class Position {
 	public static Position fromExternal(io.sethdaugherty.milepost.model.external.Position positionExternal) {
 		return new Position(positionExternal.getTimestamp(), positionExternal.getLatitude(), positionExternal.getLongitude());
 	}
+	
+	public static io.sethdaugherty.milepost.model.external.Position toExternal(Position positionInternal) {
+		io.sethdaugherty.milepost.model.external.Position positionExternal = new io.sethdaugherty.milepost.model.external.Position();
+		positionExternal.setTimestamp(positionInternal.getTimestamp());
+		positionExternal.setLatitude(positionInternal.getLatitude());
+		positionExternal.setLongitude(positionInternal.getLongitude());
+		
+		return positionExternal;
+	}
 }
