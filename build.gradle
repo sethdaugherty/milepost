@@ -40,6 +40,8 @@ dependencies {
 	
 	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
+compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    
 	runtime('com.h2database:h2')
 	
 	

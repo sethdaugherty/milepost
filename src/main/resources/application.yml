@@ -71,3 +71,7 @@ spring:
 
 logging:
   file: /var/log/milepost/application.log
+  
+  level:
+    org.springframework.web: ERROR
+    io.sethdaugherty.milepost: iNFO
