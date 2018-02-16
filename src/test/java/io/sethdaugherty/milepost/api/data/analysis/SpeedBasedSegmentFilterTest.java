@@ -1,7 +1,5 @@
 package io.sethdaugherty.milepost.api.data.analysis;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,11 +10,11 @@ import org.junit.Test;
 import io.sethdaugherty.milepost.model.Position;
 import io.sethdaugherty.milepost.model.Segment;
 
-public class SpeedBasedSegmentOutlierDetectorTest {
+public class SpeedBasedSegmentFilterTest {
 
     @Test
     public void testRemoveOutliers_emptySegment() {
-        SpeedBasedSegmentOutlierDetector detector = new SpeedBasedSegmentOutlierDetector();
+        SpeedBasedSegmentFilter detector = new SpeedBasedSegmentFilter();
         
         Segment inputSegment = new Segment(Collections.EMPTY_LIST);
         Segment actualSegment = detector.removeOutliers(inputSegment);
@@ -27,7 +25,7 @@ public class SpeedBasedSegmentOutlierDetectorTest {
 
     @Test
     public void testRemoveOutliers_noOutliers() {
-        SpeedBasedSegmentOutlierDetector detector = new SpeedBasedSegmentOutlierDetector();
+        SpeedBasedSegmentFilter detector = new SpeedBasedSegmentFilter();
         
         List<Position> positions = new ArrayList<>();
         positions.add(new Position(1, 0, 0));
@@ -48,7 +46,7 @@ public class SpeedBasedSegmentOutlierDetectorTest {
 
     @Test
     public void testRemoveOutliers_twoOutliers() {
-        SpeedBasedSegmentOutlierDetector detector = new SpeedBasedSegmentOutlierDetector();
+        SpeedBasedSegmentFilter detector = new SpeedBasedSegmentFilter();
         
         List<Position> positions = new ArrayList<>();
         positions.add(new Position(1, 0, 0));

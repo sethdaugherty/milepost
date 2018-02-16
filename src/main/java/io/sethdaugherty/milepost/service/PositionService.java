@@ -41,4 +41,9 @@ public class PositionService {
         }        
         return cleanedPositions;
     }
+
+    public List<Segment> findSmoothedPositions(DateTime startTime, DateTime endTime) {
+        List<Position> positions = positionRepository.findByTimestampBetweenOrderByTimestampAsc(startTime.getMillis(), endTime.getMillis());
+        return segmentService.fromPositionList(positions);
+    }
 }

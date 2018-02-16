@@ -2,6 +2,7 @@ package io.sethdaugherty.milepost.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import lombok.Getter;
 
@@ -12,7 +13,15 @@ public class Segment {
     public Segment(List<Position> positionList) {
         this.positionList = positionList;
     }
-    
+
+    public static io.sethdaugherty.milepost.model.external.Segment toExternal(Segment segment) {
+        List<io.sethdaugherty.milepost.model.external.Position> externalPositionList = segment.getPositionList().stream()
+                .map(Position::toExternal).collect(Collectors.toList());
+        io.sethdaugherty.milepost.model.external.Segment externalSegment = new io.sethdaugherty.milepost.model.external.Segment();
+        externalSegment.setPositions(externalPositionList);
+        return externalSegment;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == null) {

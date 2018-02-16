@@ -6,5 +6,5 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class ListPositionsResponse {
-	public @Getter @Setter List<Position> positions;
+	public @Getter @Setter List<Segment> segments;
 }

@@ -2,12 +2,11 @@ package io.sethdaugherty.milepost.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.sethdaugherty.milepost.api.data.analysis.SegmentOutlierDetector;
+import io.sethdaugherty.milepost.api.data.analysis.SegmentFilter;
 import io.sethdaugherty.milepost.model.Position;
 import io.sethdaugherty.milepost.model.Segment;
 
@@ -17,12 +16,12 @@ import io.sethdaugherty.milepost.model.Segment;
  */
 public class SegmentService {
 
-    private SegmentOutlierDetector outlierDetector;
+    private SegmentFilter outlierDetector;
     
     private static final long TIME_SEGMENTATION_THRESHOLD_MILLIS = 300000; // 5 min
 
     @Autowired
-    public SegmentService(SegmentOutlierDetector outlierDetector) {
+    public SegmentService(SegmentFilter outlierDetector) {
         this.outlierDetector = outlierDetector;
     }
     

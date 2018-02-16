@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+import io.sethdaugherty.milepost.model.Segment;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -56,16 +57,18 @@ public class MilesApiController {
 
         // TODO: move this to an offline, batch process that runs once a day and stores
         // the results in a table
-        List<Position> positions = positionService.findPositionsWithoutOutliers(startDateTime, endDateTime);
+        // List<Position> positions = positionService.findPositionsWithoutOutliers(startDateTime, endDateTime);
+        List<Segment> segments = positionService.findSmoothedPositions(startDateTime, endDateTime);
 
-        return createListPositionResponse(positions);
+        return createListPositionResponse(segments);
     }
     
-    private ResponseEntity<ListPositionsResponse> createListPositionResponse(List<Position> positions) {
-        List<io.sethdaugherty.milepost.model.external.Position> externalPositionList = positions.stream()
-                .map(Position::toExternal).collect(Collectors.toList());
+    private ResponseEntity<ListPositionsResponse> createListPositionResponse(List<Segment> segments) {
+        List<io.sethdaugherty.milepost.model.external.Segment> externalSegmentList = segments.stream()
+                .map(Segment::toExternal).collect(Collectors.toList());
+
         ListPositionsResponse response = new ListPositionsResponse();
-        response.setPositions(externalPositionList);
+        response.setSegments(externalSegmentList);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Access-Control-Allow-Origin", "*");

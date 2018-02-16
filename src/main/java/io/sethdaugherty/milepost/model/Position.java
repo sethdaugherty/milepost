@@ -18,6 +18,7 @@ public class Position implements Comparable<Position>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id;
     @Getter
     private long timestamp;
@@ -25,20 +26,31 @@ public class Position implements Comparable<Position>{
     private double latitude;
     @Getter
     private double longitude;
+    @Getter
+    private Double accuracy;
 
     public Position() {
     }
 
-    public Position(long timestamp, double latitude, double longitude) {
+    public Position(long timestamp, double latitude, double longitude, Double accuracy) {
         this.timestamp = timestamp;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.accuracy = accuracy;
         this.id = ThreadLocalRandom.current().nextLong();
+    }
+
+    public Position(long id, long timestamp, double latitude, double longitude, Double accuracy) {
+        this.timestamp = timestamp;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.accuracy = accuracy;
+        this.id = id;
     }
 
     public static Position fromExternal(io.sethdaugherty.milepost.model.external.Position positionExternal) {
         return new Position(positionExternal.getTimestamp(), positionExternal.getLatitude(),
-                positionExternal.getLongitude());
+                positionExternal.getLongitude(), positionExternal.getAccuracy());
     }
 
     public static io.sethdaugherty.milepost.model.external.Position toExternal(Position positionInternal) {
@@ -46,6 +58,7 @@ public class Position implements Comparable<Position>{
         positionExternal.setTimestamp(positionInternal.getTimestamp());
         positionExternal.setLatitude(positionInternal.getLatitude());
         positionExternal.setLongitude(positionInternal.getLongitude());
+        positionExternal.setAccuracy(positionInternal.getAccuracy());
 
         return positionExternal;
     }
@@ -62,12 +75,13 @@ public class Position implements Comparable<Position>{
         return Objects.equals(this.id, otherPosition.id)
                 && Objects.equals(this.timestamp, otherPosition.timestamp)
                 && Objects.equals(this.latitude, otherPosition.latitude)
-                && Objects.equals(this.longitude, otherPosition.longitude);
+                && Objects.equals(this.longitude, otherPosition.longitude)
+                && Objects.equals(this.accuracy, otherPosition.accuracy);
     }
     
     @Override
     public int hashCode() {
-        return Objects.hash(id, timestamp, latitude, longitude);
+        return Objects.hash(id, timestamp, latitude, longitude, accuracy);
     }
 
     @Override

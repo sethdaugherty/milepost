@@ -1,14 +1,10 @@
 package io.sethdaugherty.milepost.api.data.analysis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -16,14 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import io.sethdaugherty.milepost.metrics.TimeExecutionProfiler;
 import io.sethdaugherty.milepost.model.Position;
 import io.sethdaugherty.milepost.model.Segment;
 
 @Component
-public class SpeedBasedSegmentOutlierDetector implements SegmentOutlierDetector {
+public class SpeedBasedSegmentFilter implements SegmentFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpeedBasedSegmentOutlierDetector.class);
+    private static final Logger logger = LoggerFactory.getLogger(SpeedBasedSegmentFilter.class);
 
     private static final double Z_SCORE_THRESHOLD = 2.5;
 

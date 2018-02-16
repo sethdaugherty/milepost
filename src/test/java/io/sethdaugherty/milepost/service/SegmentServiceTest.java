@@ -1,17 +1,12 @@
 package io.sethdaugherty.milepost.service;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import io.sethdaugherty.milepost.api.data.analysis.SegmentOutlierDetector;
-import io.sethdaugherty.milepost.api.data.analysis.SpeedBasedSegmentOutlierDetector;
+import io.sethdaugherty.milepost.api.data.analysis.SegmentFilter;
 import io.sethdaugherty.milepost.model.Position;
 import io.sethdaugherty.milepost.model.Segment;
 
@@ -36,7 +31,7 @@ public class SegmentServiceTest {
     public void testFromPositionList_singleSegment() {
         // No positions should be far enough apart in time to trigger a new segment        
         // TODO: mock the outlier detector
-        SegmentService segmentService = new SegmentService(new NoOpOutlierDetector());
+        SegmentService segmentService = new SegmentService(new NoOpFilter());
         
         List<Position> positions = new ArrayList<>();
         positions.add(createPosition(10000000));
@@ -55,7 +50,7 @@ public class SegmentServiceTest {
     public void testFromPositionList_twoSegments() {
         // The first two positions are far in time from the other two, so they should be split
         // TOOD: mock the outlier detector
-        SegmentService segmentService = new SegmentService(new NoOpOutlierDetector());
+        SegmentService segmentService = new SegmentService(new NoOpFilter());
         
         Position position1 = createPosition(10000000);
         Position position2 = createPosition(10000001);
@@ -85,7 +80,7 @@ public class SegmentServiceTest {
         return new Position(timestamp, ThreadLocalRandom.current().nextDouble(-90.0, 90.0), ThreadLocalRandom.current().nextDouble(-180.0, 180.0));
     }
     
-    private class NoOpOutlierDetector implements SegmentOutlierDetector {
+    private class NoOpFilter implements SegmentFilter {
 
         @Override
         public Segment removeOutliers(Segment rawSegment) {
